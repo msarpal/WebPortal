@@ -1,0 +1,27 @@
+{
+  "name": "webportal",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/msarpal/WebPortal.git"
+  },
+  "author": "Mohit Sarpal",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/msarpal/WebPortal/issues"
+  },
+  "homepage": "https://github.com/msarpal/WebPortal#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "compression": "^1.7.2",
+    "cors": "^2.8.4",
+    "express": "^4.16.3",
+    "helmet": "^3.12.1",
+    "mongoose": "^5.1.3"
+  }
+}

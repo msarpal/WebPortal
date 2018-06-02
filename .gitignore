@@ -1,0 +1,4 @@
+node_modules
+ngrok.exe
+oc.exe
+/src/api/openshift/oc
