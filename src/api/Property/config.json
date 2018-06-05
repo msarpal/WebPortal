@@ -1,0 +1,54 @@
+{
+    "PropertType": {
+        "Residential": {
+            "House": {
+                "A": "1",
+                "B": "4",
+                "C": "6",
+                "D": "7",
+                "E": "10",
+                "range": [
+                    {
+                        "category":"A",
+                        "value": "300"
+                    },
+                    {
+                        "category":"B",
+                        "value": "500"
+                    },
+                    {
+                        "category":"C",
+                        "value": "1000"
+                    },
+                    {
+                        "category":"D",
+                        "value": "9680"
+                    }
+                   
+                ]
+            },
+            "Flat": {}
+        },
+        "Commercial": {
+            "Shop": {},
+            "CommercialSpace": {}
+        },
+        "Industrial": {
+            "Industry": {}
+        },
+        "Institutional": {
+            "Commercial": {},
+            "EducationalInstitutional": {},
+            "NonCommercialInstitutional": {}
+        },
+        "VacantPlot": {
+            "Residential": {},
+            "Commercial": {},
+            "Industrial/Institutional": {}
+        },
+        "Special Category": {
+            "PrivateHospital": {},
+            "MarriagePalace": {}
+        }
+    }
+}
