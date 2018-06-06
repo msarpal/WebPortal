@@ -10,24 +10,57 @@
                 "range": [
                     {
                         "category":"A",
-                        "value": "300"
+                        "value": 300
                     },
                     {
                         "category":"B",
-                        "value": "500"
+                        "value": 500
                     },
                     {
                         "category":"C",
-                        "value": "1000"
+                        "value": 1000
                     },
                     {
                         "category":"D",
-                        "value": "9680"
+                        "value": 9680
+                    },
+                    {
+                        "category":"E",
+                        "value": "more"
                     }
-                   
+
                 ]
             },
-            "Flat": {}
+            "Flat": {
+                "A": "1",
+                "B": "4",
+                "C": "6",
+                "D": "7",
+                "E": "10",
+                "range": [
+                    {
+                        "category":"A",
+                        "value": 300
+                    },
+                    {
+                        "category":"B",
+                        "value": 500
+                    },
+                    {
+                        "category":"C",
+                        "value": 1000
+                    },
+                    {
+                        "category":"D",
+                        "value": 9680
+                    },
+                    {
+                        "category":"E",
+                        "value": "more"
+                    }
+
+                ]
+            }
         },
         "Commercial": {
             "Shop": {},

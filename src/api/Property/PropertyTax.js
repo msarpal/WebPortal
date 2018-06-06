@@ -19,7 +19,7 @@ module.exports = router;
 function taxCalculator(req, res) {
     console.log('Tax calculation started..');
     res.send('done');
-    getTaxValues("Residential", "House", "300");
+    getTaxValues("Residential", "House", 9680);
 }
 
 
@@ -29,23 +29,20 @@ function getTaxValues(propertyType, subType, coveredArea) {
     console.log('params ' + propertyType + " " + subType + " " + coveredArea);
     // console.log(JSON.stringify(configA.PropertType[propertyType][subType].range.length));
     let range = configA.PropertType[propertyType][subType].range;
-    // var keys = Object.values(range);
-    // console.log(keys);
-    for(var index = 0 ; index < range.length ; index++){
-        // var keys = Object.keys(range[index]);
-        // var values = Object.values(range[index]);
-        // console.log(values);
-        // console.log( range[index][keys]);
-        // console.log( range[index][values]);
-        // console.log(range[index].category);
-        // console.log(range[index].value);
-// console.log(range[index].category);
-        if(coveredArea < range[index].value && coveredArea > range[index-1].value){
-            console.log('HI');
-            var category  = range[index].category;
-            console.log(category);
-            process.exit();
+    var arr = [];
+    for (var index = 0; index < range.length; index++) {
+
+        if (coveredArea <= range[index].value && typeof range[index].value == "number") {
+            console.log('Covered aread lies here .. ');
+            arr.push(range[index].category);
         }
+        if (typeof range[index].value == "string") {
+            ;
+            arr.push(range[index].category);
+        };
     }
-    // console.log(category);
+    console.log(arr[0]);
+    let category = arr[0];
+    let price = configA.PropertType[propertyType][subType][category];
+    console.log(price);
 }
