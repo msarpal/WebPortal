@@ -33,11 +33,11 @@ function getTaxValues(propertyType, subType, coveredArea) {
     for (var index = 0; index < range.length; index++) {
 
         if (coveredArea <= range[index].value && typeof range[index].value == "number") {
-            console.log('Covered aread lies here .. ');
+            // console.log('Covered aread lies here .. ');
             arr.push(range[index].category);
         }
         if (typeof range[index].value == "string") {
-            ;
+            
             arr.push(range[index].category);
         };
     }
