@@ -3,7 +3,7 @@ var service = {};
 service.getPriceCategory = getPriceCategory;
 service.getCommercialPrice = getCommercialPrice;
 
-var configA = require('./config');
+var config = require('./configAa');
 
 module.exports = service;
 
@@ -18,7 +18,7 @@ function getPriceCategory(propertyType, subType, n, callback) {
     var range
     if (subType == "") {
         console.log('params subtype not present' + propertyType + " " + n);
-        range = configA.propertytype[propertyType].range;
+        range = config.propertytype[propertyType].range;
         var arr = [];
         for (var index = 0; index < range.length; index++) {
 
@@ -33,13 +33,13 @@ function getPriceCategory(propertyType, subType, n, callback) {
         }
         console.log('Category ==> ' + arr[0]);
         let category = arr[0];
-        let price = configA.propertytype[propertyType][category];
+        let price = config.propertytype[propertyType][category];
         console.log("price (Rupee) per year==> " + price);
         callback(price);
     }
     else {
         console.log('params subtype present' + propertyType + " " + subType + " " + n);
-        range = configA.propertytype[propertyType][subType].range;
+        range = config.propertytype[propertyType][subType].range;
         var arr = [];
         for (var index = 0; index < range.length; index++) {
 
@@ -54,7 +54,7 @@ function getPriceCategory(propertyType, subType, n, callback) {
         }
         console.log('Category ==> ' + arr[0]);
         let category = arr[0];
-        let price = configA.propertytype[propertyType][subType][category];
+        let price = config.propertytype[propertyType][subType][category];
         console.log("price (Rupee) per year==> " + price);
         callback(price);
     }
@@ -68,7 +68,7 @@ function getPriceCategory(propertyType, subType, n, callback) {
 function getCommercialPrice(coveredArea, callback) {
     console.log('Getting  price of commerical space..');
 
-    let range = configA.propertytype['commercial']['commercialspace'].range;
+    let range = config.propertytype['commercial']['commercialspace'].range;
     var arr = [];
     for (var index = 0; index < range.length; index++) {
 
@@ -81,7 +81,7 @@ function getCommercialPrice(coveredArea, callback) {
     }
     console.log('Category ==> ' + arr[0]);
     let category = arr[0];
-    let price = configA.propertytype['commercial']['commercialspace'][category];
+    let price = config.propertytype['commercial']['commercialspace'][category];
     // console.log('Price as per the category ==> ' + price);
     callback(price);
 

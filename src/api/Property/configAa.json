@@ -261,11 +261,10 @@
                     "value": 50
                 },
                 "insidemall": {
-                    "value": 50
+                    "value": 100
                 },
                 "commercial": {
-                    "status": true,
-                    "value": 50
+                    "status": true
                 }
             },
             "bank": {
@@ -323,8 +322,7 @@
                     }
                 ],
                 "commercial": {
-                    "status": true,
-                    "value": 50
+                    "status": true
                 }
             },
             "pg": {
@@ -354,8 +352,7 @@
                     }
                 ],
                 "commercial": {
-                    "status": true,
-                    "value": 50
+                    "status": true
                 }
             }
         }
