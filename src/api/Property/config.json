@@ -1,7 +1,7 @@
 {
-    "PropertType": {
-        "Residential": {
-            "House": {
+    "propertytype": {
+        "residential": {
+            "house": {
                 "A": "1",
                 "B": "4",
                 "C": "6",
@@ -31,7 +31,7 @@
                     }
                 ]
             },
-            "Flat": {
+            "flat": {
                 "A": "1",
                 "B": "1.20",
                 "C": "1.50",
@@ -52,8 +52,8 @@
                 ]
             }
         },
-        "Commercial": {
-            "Shop": {
+        "commercial": {
+            "shop": {
                 "A": 24,
                 "B": 36,
                 "C": 48,
@@ -78,7 +78,7 @@
                     }
                 ]
             },
-            "CommercialSpace": {
+            "commercialspace": {
                 "A": 12,
                 "B": 15,
                 "unit": "squarefoot",
@@ -88,13 +88,13 @@
                         "value": 1000
                     },
                     {
-                        "category": "D",
+                        "category": "B",
                         "value": "more"
                     }
                 ]
             }
         },
-        "Industrial": {
+        "industrial": {
             "A": 5,
             "B": 6,
             "C": 2,
@@ -119,8 +119,8 @@
                 }
             ]
         },
-        "Institutional": {
-            "Commercial": {
+        "institutional": {
+            "commercial": {
                 "A": 12,
                 "B": 18,
                 "C": 24,
@@ -140,7 +140,7 @@
                     }
                 ]
             },
-            "EducationalInstitutional": {
+            "educationalinstitutional": {
                 "A": 10000,
                 "B": 150000,
                 "C": 250000,
@@ -165,7 +165,7 @@
                     }
                 ]
             },
-            "NonCommercialInstitutional": {
+            "noncommercialinstitutional": {
                 "A": 10,
                 "B": 12,
                 "C": 15,
@@ -186,15 +186,15 @@
                 ]
             }
         },
-        "VacantPlot": {
-            "Residential": {
+        "vacantplot": {
+            "residential": {
                 "A": 0.50,
                 "B": 1,
+                "min": 101,
                 "unit": "squareyard",
                 "range": [
                     {
                         "category": "A",
-                        "min" : 101,
                         "value": 500
                     },
                     {
@@ -203,35 +203,35 @@
                     }
                 ]
             },
-            "Commercial": {
+            "commercial": {
                 "A": 30,
+                "min": 101,
                 "unit": "squareyard",
                 "range": [
                     {
                         "category": "A",
-                        "min":101,
                         "value": 100
                     }
                 ]
             },
-            "Industrial/Institutional": {
+            "industrial/institutional": {
                 "A": 50,
                 "unit": "squareyard",
+                "min": 501,
                 "range": [
                     {
                         "category": "A",
-                        "min" : 501,
                         "value": "more"
                     }
                 ]
             }
         },
-        "Special Category": {
-            "PrivateHospital": {
-                "A": 20,
-                "B": 40,
-                "C": 60,
+        "specialcategory": {
+            "privatehospital": {    
                 "unit": "bed",
+                "A":20,
+                "B":40,
+                "C":60,
                 "range": [
                     {
                         "category": "A",
@@ -244,51 +244,41 @@
                     {
                         "category": "C",
                         "value": "more"
-                    }
-                ]
-            },
-            "MarriagePalace": {
-                "A": 20,
-                "B": 40,
-                "C": 60,
-                "unit": "bed",
-                "range": [
-                    {
-                        "category": "A",
-                        "value": 50
-                    },
-                    {
-                        "category": "B",
-                        "value": 100
-                    },
-                    {
-                        "category": "C",
-                        "value": "more"
-                    }
-                ]
-            },
-            "cinemahall": {
-                "range": [
-                    {
-                        "category": "outside-mall",
-                        "value": 50
-                    },
-                    {
-                        "category": "inside-mall",
-                        "value": 100
                     }
                 ],
-                "commercial": true
+                "commercial": {
+                    "status": true
+                }
+            },
+            "marriagepalace": {
+                "commercial": {
+                    "status": true,
+                    "value": 100
+                }
+            },
+            "cinemahall": {
+                "standalone": {
+                    "value": 50
+                },
+                "insidemall": {
+                    "value": 50
+                },
+                "commercial": {
+                    "status": true,
+                    "value": 50
+                }
             },
             "bank": {
-                "value": 100,
-                "commercial": true
+                "commercial": {
+                    "status": true,
+                    "value": 100
+                }
             },
             "storagegodown": {
                 "A": 6.00,
                 "B": 9.00,
                 "C": 9.60,
-                "unit": "bed",
+                "unit": "squareyard",
                 "range": [
                     {
                         "category": "A",
@@ -305,54 +295,49 @@
                 ]
             },
             "grainmarket": {
-                "A": 20,
-                "B": 40,
-                "C": 60,
-                "unit": "bed",
+                "shop": {
+                    "value": 2400
+                },
+                "booth": {
+                    "value": 1200
+                }
+            },
+            "club": {
+                "commercial": {
+                    "status": true,
+                    "value": 50
+                }
+            },
+            "hotel": {
+                "A": 75,
+                "B": 125,
+                "unit": "star",
                 "range": [
                     {
                         "category": "A",
-                        "value": 50
+                        "value": 3
                     },
                     {
                         "category": "B",
-                        "value": 100
-                    },
-                    {
-                        "category": "C",
                         "value": "more"
                     }
-                ]
-            },
-            "club": {
-                "value": 75,
-                "commercial": true
-            },
-            "hotel": {
-                "restaurant": {
-                    "A": 75,
-                    "B": 125,
-                    "unit": "star",
-                    "range": [
-                        {
-                            "category": "A",
-                            "value": 3
-                        },
-                        {
-                            "category": "B",
-                            "value": "more"
-                        }
-                    ],
-                    "commercial": true
+                ],
+                "commercial": {
+                    "status": true,
+                    "value": 50
                 }
             },
             "pg": {
-                "value": 50,
-                "commercial": true
+                "commercial": {
+                    "status": true,
+                    "value": 50
+                }
             },
             "privateoffice": {
-                "value": 100,
-                "commercial": true
+                "commercial": {
+                    "status": true,
+                    "value": 50
+                }
             },
             "restaurant": {
                 "A": 75,
@@ -368,7 +353,10 @@
                         "value": "more"
                     }
                 ],
-                "commercial": true
+                "commercial": {
+                    "status": true,
+                    "value": 50
+                }
             }
         }
     }
