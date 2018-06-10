@@ -2,11 +2,11 @@
     "propertytype": {
         "residential": {
             "house": {
-                "A": "0.75",
-                "B": "3",
-                "C": "4.50",
-                "D": "5.25",
-                "E": "7.50",
+                "A": 0.50,
+                "B": 2,
+                "C": 3,
+                "D": 3.50,
+                "E": 5.00,
                 "unit": "squareyard",
                 "range": [
                     {
@@ -32,14 +32,14 @@
                 ]
             },
             "flat": {
-                "A": 0.75,
-                "B": 0.90,
-                "C": 1.125,
+                "A": 0.50,
+                "B": 0.60,
+                "C": 0.75,
                 "unit": "squarefoot",
                 "range": [
                     {
                         "category": "A",
-                        "value": 2000
+                        "value": 2000                                                                                                                                        
                     },
                     {
                         "category": "B",
@@ -54,10 +54,10 @@
         },
         "commercial": {
             "shop": {
-                "A": 18,
-                "B": 27,
-                "C": 36,
-                "D": 45,
+                "A": 12.00,
+                "B": 18.00,
+                "C": 24.00,
+                "D": 30.00,
                 "unit": "squareyard",
                 "range": [
                     {
@@ -79,8 +79,8 @@
                 ]
             },
             "commercialspace": {
-                "A": 9,
-                "B": 11.25,
+                "A": 6.00,
+                "B": 7.50,
                 "unit": "squarefoot",
                 "range": [
                     {
@@ -95,10 +95,10 @@
             }
         },
         "industrial": {
-            "A": 3.75,
-            "B": 4.50,
-            "C": 1.50,
-            "D": 0.75,
+            "A":2.50,
+            "B": 3.00,
+            "C": 1,
+            "D": 0.50,
             "unit": "squareyard",
             "range": [
                 {
@@ -121,9 +121,9 @@
         },
         "institutional": {
             "commercial": {
-                "A": 9,
-                "B": 13.50,
-                "C": 18,
+                "A": 6,
+                "B": 9,
+                "C": 12,
                 "unit": "squareyard",
                 "range": [
                     {
@@ -141,10 +141,10 @@
                 ]
             },
             "educationalinstitutional": {
-                "A": 7500,
-                "B": 125000,
-                "C": 187500,
-                "D": 375000,
+                "A": 5000,
+                "B": 75000,
+                "C": 125000,
+                "D": 250000,
                 "unit": "squareyard",
                 "range": [
                     {
@@ -166,9 +166,9 @@
                 ]
             },
             "noncommercialinstitutional": {
-                "A": 7.50,
-                "B": 9,
-                "C": 11.25,
+                "A": 5.00,
+                "B": 6.00,
+                "C": 7.50,
                 "unit": "squareyard",
                 "range": [
                     {
@@ -188,8 +188,8 @@
         },
         "vacantplot": {
             "residential": {
-                "A": 0.375,
-                "B": 0.75,
+                "A": 0.25,
+                "B": 0.50,
                 "min": 101,
                 "unit": "squareyard",
                 "range": [
@@ -204,7 +204,7 @@
                 ]
             },
             "commercial": {
-                "A": 3.75,
+                "A": 2.50,
                 "min": 101,
                 "unit": "squareyard",
                 "range": [
@@ -215,7 +215,7 @@
                 ]
             },
             "industrial/institutional": {
-                "A": 1.50,
+                "A": 1.00,
                 "unit": "squareyard",
                 "min": 501,
                 "range": [
@@ -253,7 +253,7 @@
             "marriagepalace": {
                 "commercial": {
                     "status": true,
-                    "value": 100
+                    "value": 50
                 }
             },
             "cinemahall": {
@@ -274,9 +274,9 @@
                 }
             },
             "storagegodown": {
-                "A": 4.50,
-                "B": 6.75,
-                "C": 7.20,
+                "A": 3.00,
+                "B": 4.50,
+                "C": 4.80,
                 "unit": "squareyard",
                 "range": [
                     {
@@ -295,10 +295,10 @@
             },
             "grainmarket": {
                 "shop": {
-                    "value": 1800
+                    "value": 1200
                 },
                 "booth": {
-                    "value": 900
+                    "value": 600
                 }
             },
             "club": {
@@ -334,7 +334,7 @@
             "privateoffice": {
                 "commercial": {
                     "status": true,
-                    "value": 50
+                    "value": 100
                 }
             },
             "restaurant": {

@@ -1,9 +1,13 @@
+/**
+ * Common methods being used in application.
+ */
+
 var service = {};
 
 service.getPriceCategory = getPriceCategory;
 service.getCommercialPrice = getCommercialPrice;
 
-var config = require('./configAa');
+var config = require('./config/configAa');
 
 module.exports = service;
 

@@ -1,0 +1,360 @@
+{
+    "propertytype": {
+        "residential": {
+            "house": {
+                "A": 1,
+                "B": 4,
+                "C": 6,
+                "D": 7,
+                "E": 10,
+                "unit": "squareyard",
+                "range": [
+                    {
+                        "category": "A",
+                        "value": 300
+                    },
+                    {
+                        "category": "B",
+                        "value": 500
+                    },
+                    {
+                        "category": "C",
+                        "value": 1000
+                    },
+                    {
+                        "category": "D",
+                        "value": 9680
+                    },
+                    {
+                        "category": "E",
+                        "value": "more"
+                    }
+                ]
+            },
+            "flat": {
+                "A": 1,
+                "B": 1.20,
+                "C": 1.50,
+                "unit": "squarefoot",
+                "range": [
+                    {
+                        "category": "A",
+                        "value": 2000
+                    },
+                    {
+                        "category": "B",
+                        "value": 5000
+                    },
+                    {
+                        "category": "C",
+                        "value": "more"
+                    }
+                ]
+            }
+        },
+        "commercial": {
+            "shop": {
+                "A": 24,
+                "B": 36,
+                "C": 48,
+                "D": 60,
+                "unit": "squareyard",
+                "range": [
+                    {
+                        "category": "A",
+                        "value": 50
+                    },
+                    {
+                        "category": "B",
+                        "value": 100
+                    },
+                    {
+                        "category": "C",
+                        "value": 500
+                    },
+                    {
+                        "category": "D",
+                        "value": 1000
+                    }
+                ]
+            },
+            "commercialspace": {
+                "A": 12,
+                "B": 15,
+                "unit": "squarefoot",
+                "range": [
+                    {
+                        "category": "A",
+                        "value": 1000
+                    },
+                    {
+                        "category": "B",
+                        "value": "more"
+                    }
+                ]
+            }
+        },
+        "industrial": {
+            "A": 5,
+            "B": 6,
+            "C": 2,
+            "D": 1,
+            "unit": "squareyard",
+            "range": [
+                {
+                    "category": "A",
+                    "value": 2500
+                },
+                {
+                    "category": "B",
+                    "value": 9680
+                },
+                {
+                    "category": "C",
+                    "value": 242000
+                },
+                {
+                    "category": "D",
+                    "value": "more"
+                }
+            ]
+        },
+        "institutional": {
+            "commercial": {
+                "A": 12,
+                "B": 18,
+                "C": 24,
+                "unit": "squareyard",
+                "range": [
+                    {
+                        "category": "A",
+                        "value": 2500
+                    },
+                    {
+                        "category": "B",
+                        "value": 5000
+                    },
+                    {
+                        "category": "C",
+                        "value": "more"
+                    }
+                ]
+            },
+            "educationalinstitutional": {
+                "A": 10000,
+                "B": 150000,
+                "C": 250000,
+                "D": 500000,
+                "unit": "squareyard",
+                "range": [
+                    {
+                        "category": "A",
+                        "value": 4840
+                    },
+                    {
+                        "category": "B",
+                        "value": 12100
+                    },
+                    {
+                        "category": "C",
+                        "value": 24200
+                    },
+                    {
+                        "category": "D",
+                        "value": "more"
+                    }
+                ]
+            },
+            "noncommercialinstitutional": {
+                "A": 10,
+                "B": 12,
+                "C": 15,
+                "unit": "squareyard",
+                "range": [
+                    {
+                        "category": "A",
+                        "value": 2500
+                    },
+                    {
+                        "category": "B",
+                        "value": 5000
+                    },
+                    {
+                        "category": "C",
+                        "value": "more"
+                    }
+                ]
+            }
+        },
+        "vacantplot": {
+            "residential": {
+                "A": 0.50,
+                "B": 1,
+                "min": 101,
+                "unit": "squareyard",
+                "range": [
+                    {
+                        "category": "A",
+                        "value": 500
+                    },
+                    {
+                        "category": "B",
+                        "value": "more"
+                    }
+                ]
+            },
+            "commercial": {
+                "A": 5.00,
+                "min": 101,
+                "unit": "squareyard",
+                "range": [
+                    {
+                        "category": "A",
+                        "value": 100
+                    }
+                ]
+            },
+            "industrial/institutional": {
+                "A": 2.00,
+                "unit": "squareyard",
+                "min": 501,
+                "range": [
+                    {
+                        "category": "A",
+                        "value": "more"
+                    }
+                ]
+            }
+        },
+        "specialcategory": {
+            "privatehospital": {    
+                "unit": "bed",
+                "A":20,
+                "B":40,
+                "C":60,
+                "range": [
+                    {
+                        "category": "A",
+                        "value": 50
+                    },
+                    {
+                        "category": "B",
+                        "value": 100
+                    },
+                    {
+                        "category": "C",
+                        "value": "more"
+                    }
+                ],
+                "commercial": {
+                    "status": true
+                }
+            },
+            "marriagepalace": {
+                "commercial": {
+                    "status": true,
+                    "value": 100
+                }
+            },
+            "cinemahall": {
+                "standalone": {
+                    "value": 50
+                },
+                "insidemall": {
+                    "value": 100
+                },
+                "commercial": {
+                    "status": true
+                }
+            },
+            "bank": {
+                "commercial": {
+                    "status": true,
+                    "value": 100
+                }
+            },
+            "storagegodown": {
+                "A": 6.00,
+                "B": 9.00,
+                "C": 9.60,
+                "unit": "squareyard",
+                "range": [
+                    {
+                        "category": "A",
+                        "value": 2500
+                    },
+                    {
+                        "category": "B",
+                        "value": 4840
+                    },
+                    {
+                        "category": "C",
+                        "value": "more"
+                    }
+                ]
+            },
+            "grainmarket": {
+                "shop": {
+                    "value": 2400
+                },
+                "booth": {
+                    "value": 1200
+                }
+            },
+            "club": {
+                "commercial": {
+                    "status": true,
+                    "value": 50
+                }
+            },
+            "hotel": {
+                "A": 75,
+                "B": 125,
+                "unit": "star",
+                "range": [
+                    {
+                        "category": "A",
+                        "value": 3
+                    },
+                    {
+                        "category": "B",
+                        "value": "more"
+                    }
+                ],
+                "commercial": {
+                    "status": true
+                }
+            },
+            "pg": {
+                "commercial": {
+                    "status": true,
+                    "value": 50
+                }
+            },
+            "privateoffice": {
+                "commercial": {
+                    "status": true,
+                    "value": 50
+                }
+            },
+            "restaurant": {
+                "A": 75,
+                "B": 100,
+                "unit": "squarefoot",
+                "range": [
+                    {
+                        "category": "A",
+                        "value": 1000
+                    },
+                    {
+                        "category": "B",
+                        "value": "more"
+                    }
+                ],
+                "commercial": {
+                    "status": true
+                }
+            }
+        }
+    }
+}

@@ -5,26 +5,24 @@
 var express = require('express');
 var router = express.Router();
 var utility = require('./functions')
-
-var config = require('./configAa');
-
+var config = require('./config/configAa');
 
 router.get('/calculate', taxCalculator);
 
-var taxPerYear = "";
+var taxPerYear, jsonReply = "";
 module.exports = router;
 
 /**
- * 
+ * Tax calculator API
  * @param {*} req 
  * @param {*} res 
  */
-
 function taxCalculator(req, res) {
 
     console.log('Tax calculation started..');
 
-    res.send('done');
+    // if (req.body == undefined && req.body.property_type !== undefined && req.body.sub_type !== undefined && req.body.covered_area !== undefined && req.body.tax_year !== undefined) {
+
 
     // getTaxValues("specialcategory", "privatehospital", 9680, '');
     // getTaxValues("specialcategory", "storagegodown", 3000, '');
@@ -34,8 +32,8 @@ function taxCalculator(req, res) {
     // getTaxValues("specialcategory", "pg", 100, '');
     // getTaxValues("specialcategory", "privateoffice", 10100, '');
     // getTaxValues("specialcategory", "restaurant", 900, '');
-    // getTaxValues("specialcategory", "cinemahall",  10000 , "standalone");
-    getTaxValues("specialcategory", "hotel", 10000, '', 5, '');
+    getTaxValues("specialcategory", "cinemahall", 10000, "", "", "standalone");
+    // getTaxValues("specialcategory", "hotel", 10000, '', 5, '');
     // getTaxValues("specialcategory", "grainmarket", 10000, '', '', 'booth');
 
     // getTaxValues("residential", "house", 9680, 70);
@@ -43,11 +41,17 @@ function taxCalculator(req, res) {
     // getTaxValues("institutional", "commercial", 2600, 70);
     // getTaxValues("industrial", "", 2600, 70);
     // getTaxValues("vacantplot", "residential", 5020, 70);
-
+    // }
+    // else {
+    //     console.log('Invalid/missing parameters');
+    //     res.send('Invalid/missing parameters');
+    // }
+    res.send('Property tax API');
+    
 }
 
 /**
- * Getting tax per year and total tax till given year
+ * Getting tax values per year and total tax till given year.
  * @param {*} propertyType 
  * @param {*} subType 
  * @param {*} input 
@@ -59,6 +63,12 @@ function getTaxValues(propertyType, subType, input, bed, star, subSubType) {
     console.log('Getting values ..');
     console.log('Taxation values ' + propertyType);
 
+    propertyType = propertyType.toLowerCase();
+    subType = subType.toLowerCase();
+    subSubType = subSubType.toLowerCase();
+
+
+    
     if (propertyType === "residential" || propertyType === "commercial" || propertyType === "institutional") {
         utility.getPriceCategory(propertyType, subType, input, function (price) {
             console.log(propertyType + ' done');
@@ -73,7 +83,7 @@ function getTaxValues(propertyType, subType, input, bed, star, subSubType) {
     }
     if (propertyType === "vacantplot") {
 
-        if (configA.propertytype[propertyType][subType].min !== undefined && input > configA.propertytype[propertyType][subType].min) {
+        if (config.propertytype[propertyType][subType].min !== undefined && input > config.propertytype[propertyType][subType].min) {
             console.log(propertyType + ' Minimum value satisfied');
             utility.getPriceCategory(propertyType, subType, input, function (price) {
                 console.log(propertyType + ' done');
@@ -81,15 +91,15 @@ function getTaxValues(propertyType, subType, input, bed, star, subSubType) {
             });
         }
         else {
-            console.log('Minimum covered area is ' + configA.propertytype[propertyType][subType].min);
+            console.log('Minimum covered area is ' + config.propertytype[propertyType][subType].min);
         }
     }
 
     if (propertyType === "specialcategory") {
         switch (subType) {
             case "privatehospital", "restaurant":
-                console.log('Hospital' + JSON.stringify(configA.propertytype[propertyType][subType]['commercial'], null, 2));
-                if (configA.propertytype[propertyType][subType]['commercial']['status'] !== undefined && configA.propertytype[propertyType][subType]['commercial']['status'] == true) {
+                console.log('Hospital' + JSON.stringify(config.propertytype[propertyType][subType]['commercial'], null, 2));
+                if (config.propertytype[propertyType][subType]['commercial']['status'] !== undefined && config.propertytype[propertyType][subType]['commercial']['status'] == true) {
                     console.log('commercial');
                     utility.getPriceCategory(propertyType, subType, bed, function (price) {
                         utility.getCommercialPrice(input, function (commercialPrice) {
@@ -102,8 +112,8 @@ function getTaxValues(propertyType, subType, input, bed, star, subSubType) {
                 break;
 
             case "marriagepalace", "bank", "club", "pg", "privateoffice":
-                if (configA.propertytype[propertyType][subType]['commercial']['status'] !== undefined && configA.propertytype[propertyType][subType]['commercial']['status'] == true) {
-                    commercialPrice = configA.propertytype[propertyType][subType]['commercial']['value']
+                if (config.propertytype[propertyType][subType]['commercial']['status'] !== undefined && config.propertytype[propertyType][subType]['commercial']['status'] == true) {
+                    commercialPrice = config.propertytype[propertyType][subType]['commercial']['value']
                     console.log(propertyType + " " + commercialPrice);
                     utility.getCommercialPrice(input, function (price) {
                         console.log('After ' + commercialPrice + '% of ' + price + ' is ==> ' + (commercialPrice / 100) * price);
@@ -121,9 +131,9 @@ function getTaxValues(propertyType, subType, input, bed, star, subSubType) {
                 break;
 
             case "cinemahall":
-                console.log(configA.propertytype[propertyType][subType]['commercial']);
-                if (configA.propertytype[propertyType][subType]['commercial']['status'] !== undefined && configA.propertytype[propertyType][subType]['commercial']['status'] == true) {
-                    commercialPrice = configA.propertytype[propertyType][subType][subSubType]['value'];
+                console.log(config.propertytype[propertyType][subType]['commercial']);
+                if (config.propertytype[propertyType][subType]['commercial']['status'] !== undefined && config.propertytype[propertyType][subType]['commercial']['status'] == true) {
+                    commercialPrice = config.propertytype[propertyType][subType][subSubType]['value'];
                     utility.getCommercialPrice(input, function (price) {
                         console.log(commercialPrice + '% of ' + price + ' is ==> ' + (commercialPrice / 100) * price);
                         taxPerYear = (commercialPrice / 100) * price;
@@ -132,7 +142,7 @@ function getTaxValues(propertyType, subType, input, bed, star, subSubType) {
                 break;
 
             case "hotel":
-                if (configA.propertytype[propertyType][subType]['commercial']['status'] == true !== undefined && configA.propertytype[propertyType][subType]['commercial']['status'] == true) {
+                if (config.propertytype[propertyType][subType]['commercial']['status'] == true !== undefined && config.propertytype[propertyType][subType]['commercial']['status'] == true) {
                     utility.getPriceCategory(propertyType, subType, star, function (price) {
                         utility.getCommercialPrice(input, function (commercialPrice) {
                             console.log('Price of commercial space as pe the given covred area ==> ' + price);
@@ -143,9 +153,9 @@ function getTaxValues(propertyType, subType, input, bed, star, subSubType) {
                 }
                 break;
             case "grainmarket":
-                if (configA.propertytype[propertyType][subType][subSubType]['value'] !== undefined) {
-                    console.log('Grain market ' + configA.propertytype[propertyType][subType][subSubType]['value']);
-                    taxPerYear = configA.propertytype[propertyType][subType][subSubType]['value'];
+                if (config.propertytype[propertyType][subType][subSubType]['value'] !== undefined) {
+                    console.log('Grain market ' + config.propertytype[propertyType][subType][subSubType]['value']);
+                    taxPerYear = config.propertytype[propertyType][subType][subSubType]['value'];
                 }
                 break;
             default:
@@ -155,10 +165,10 @@ function getTaxValues(propertyType, subType, input, bed, star, subSubType) {
     }
     if (taxPerYear !== "") {
         console.log('Tax per year is ' + taxPerYear);
-        let totalYears = new Date().getFullYear() - '2016  ';
+        let totalYears = new Date().getFullYear() - '2016';
         if (totalYears > 0) {
             console.log('Tax till current year ' + totalYears * taxPerYear);
         }
+
     }
 }
-
