@@ -227,11 +227,11 @@
             }
         },
         "specialcategory": {
-            "privatehospital": {    
+            "privatehospital": {
                 "unit": "bed",
-                "A":20,
-                "B":40,
-                "C":60,
+                "A": 20,
+                "B": 40,
+                "C": 60,
                 "range": [
                     {
                         "category": "A",
@@ -353,6 +353,99 @@
                 ],
                 "commercial": {
                     "status": true
+                }
+            }
+        },
+        "rebate": {
+            "norebate": {
+                "params": {
+                    "value": 0,
+                    "self_occupied": false,
+                    "area": "no"
+                }
+            },
+            "religiousproperty": {
+                "params": {
+                    "value": 0,
+                    "self_occupied": false,
+                    "area": "no"
+                }
+            },
+            "orphanages": {
+                "params": {
+                    "value": 0,
+                    "self_occupied": false,
+                    "area": "no"
+                }
+            },
+            "almhouses": {
+                "params": {
+                    "value": 0,
+                    "self_occupied": false,
+                    "area": "no"
+                }
+            },
+            "municipalbuildings": {
+                "params": {
+                    "value": 0,
+                    "self_occupied": false,
+                    "area": "no"
+                }
+            },
+            "cremation/burialgrounds": {
+                "params": {
+                    "value": 0,
+                    "self_occupied": false,
+                    "area": "no"
+                }
+            },
+            "dharamshala": {
+                "params": {
+                    "value": 0,
+                    "self_occupied": false,
+                    "area": "no"
+                }
+            },
+            "centralandstategovernmenteducationalinstitutions": {
+                "params": {
+                    "value": 0,
+                    "self_occupied": false,
+                    "area": "no"
+                }
+            },
+            "governmenthospitals": {
+                "params": {
+                    "value": 0,
+                    "self_occupied": false,
+                    "area": "no"
+                }
+            },
+            "selfdefence/paramilitaryforcepersonnel": {
+                "params": {
+                    "value": 0,
+                    "self_occupied": true,
+                    "area": 300
+                }
+            },
+            "ex-service/paramilitaryforcepersonnel/his/herspouse": {
+                "params": {
+                    "value": 0,
+                    "self_occupied": false,
+                    "area": "no"
+                }
+            },
+            "freedomfighters": {
+                "params": {
+                    "value": 0,
+                    "self_occupied": true,
+                    "area": "no"
+                }
+            },
+            "stategovernmentbuilding": {
+                "params": {
+                    "value": 50,
+                    "self_occupied": false,
+                    "area": "no"
                 }
             }
         }
