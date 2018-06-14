@@ -10,7 +10,7 @@ var config = require('./config/configAa');
 router.get('/calculate', taxCalculator);
 
 var taxPerYear, jsonReply = "";
-var rebVal = 1;
+var rebVal = 0;
 module.exports = router;
 
 /**
@@ -24,23 +24,25 @@ function taxCalculator(req, res) {
 
     // if (req.body == undefined && req.body.property_type !== undefined && req.body.sub_type !== undefined && req.body.covered_area !== undefined && req.body.tax_year !== undefined) {
 
-    // getTaxValues("specialcategory", "privatehospital", 9680, 8, '', '');
-    // getTaxValues("specialcategory", "storagegodown", 3000, '','','');
-    // getTaxValues("specialcategory", "marriagepalace", 500, '','','');
-    // getTaxValues("specialcategory", "bank", 500, '','','');
-    // getTaxValues("specialcategory", "club", 100, '','','');
-    // getTaxValues("specialcategory", "pg", 100, '','','');
-    // getTaxValues("specialcategory", "privateoffice", 10100, '','','');
-    // getTaxValues("specialcategory", "restaurant", 900, '','','');
-    // getTaxValues("specialcategory", "cinemahall", 10000, "", "", "standalone");
-    // getTaxValues("specialcategory", "hotel", 10000, '', 5, '');
-    // getTaxValues("specialcategory", "grainmarket", 10000, '', '', 'booth');
+    // getTaxValues("specialcategory", "privatehospital", 9680, 8, '', '','','');
+    // getTaxValues("specialcategory", "storagegodown", 3000, '','','','','');
+    // getTaxValues("specialcategory", "marriagepalace", 500, '','','','','');
+    // getTaxValues("specialcategory", "bank", 500, '','','','','');
+    // getTaxValues("specialcategory", "club", 100, '','','','','');
+    // getTaxValues("specialcategory", "pg", 100, '','','','','');
+    // getTaxValues("specialcategory", "privateoffice", 10100, '','','','','');
+    // getTaxValues("specialcategory", "restaurant", 900, '','','','','');
+    // getTaxValues("specialcategory", "cinemahall", 10000, "", "", "standalone",'','');
+    // getTaxValues("specialcategory", "hotel", 10000, '', 5, '','','');
+    // getTaxValues("specialcategory", "grainmarket", 10000, '', '', 'booth','','');
 
-    // getTaxValues("residential", "house", 9680, '', '', '');
-    // getTaxValues("commercial", "shop", 200, '', '', '');
-    // getTaxValues("institutional", "commercial", 2600, '','','');
-    // getTaxValues("industrial", "", 2600, '','','');
-    getTaxValues("vacantplot", "residential", 5000  , '','','');
+    // getTaxValues("residential", "house", 9680, '', '', '','','');
+    getTaxValues("commercial", "shop", 900, '', '', '','parking','basement');
+    // getTaxValues("commercial", "commercialspace", 900, '', '', '','rented','');
+    
+    // getTaxValues("institutional", "commercial", 2600, '','','','','');
+    // getTaxValues("industrial", "", 2600, '','','','','');
+    // getTaxValues("vacantplot", "residential", 5000, '', '', '','','');
     // }
     // else {
     //     console.log('Invalid/missing parameters');
@@ -59,7 +61,7 @@ function taxCalculator(req, res) {
  * @param {*} star 
  * @param {*} subSubType 
  */
-function getTaxValues(propertyType, subType, input, bed, star, subSubType) {
+function getTaxValues(propertyType, subType, input, bed, star, subSubType,ownership,floor){
     console.log('Getting values ..');
     console.log('Taxation values --> ' + propertyType + " " + subType);
 
@@ -67,11 +69,26 @@ function getTaxValues(propertyType, subType, input, bed, star, subSubType) {
     subType = subType.toLowerCase();
     subSubType = subSubType.toLowerCase();
 
-
-
     if (propertyType === "residential" || propertyType === "commercial" || propertyType === "institutional") {
+
+        console.log("subtype " + subType);
+
+        if (propertyType === "commercial") {
+            if (input > 1000) {
+                subType = "commercialspace";
+            }
+        }
+        console.log("subtype " + subType);
         utility.getPriceCategory(propertyType, subType, input, function (price) {
             console.log(propertyType + ' done');
+            if (propertyType === "commercial"  && (subType === "shop" || subType === "commercialspace" ) && floor === "basement" && ownership === "parking") {
+                console.log('Commercial shop/comm space and parking')
+                price = 0;
+            }
+            if (propertyType === "commercial"  && (subType === "shop" || subType === "commercialspace" ) && ownership === "rented") {
+                console.log('Commercial shop/comm space and rented')
+                price = price * 125;
+            }
             taxPerYear = price;
         });
     }
@@ -83,17 +100,17 @@ function getTaxValues(propertyType, subType, input, bed, star, subSubType) {
     }
     if (propertyType === "vacantplot") {
 
-        if (config.propertytype[propertyType][subType].min !== undefined && input > config.propertytype[propertyType][subType].min) {
-            console.log(propertyType + ' Minimum value satisfied');
+        // if (config.propertytype[propertyType][subType].min !== undefined && input > config.propertytype[propertyType][subType].min) {
+            console.log(propertyType + ' Vacant plot');
             utility.getPriceCategory(propertyType, subType, input, function (price) {
                 console.log(propertyType + ' done');
                 taxPerYear = price;
             });
-        }
-        else {
-            console.log('Could not calculate the tax as minimum covered area for this property is ' + config.propertytype[propertyType][subType].min);
-            taxPerYear = "";
-        }
+        // }
+        // else {
+        //     console.log('Could not calculate the tax as minimum covered area for this property is ' + config.propertytype[propertyType][subType].min);
+        //     taxPerYear = "";
+        // }
     }
 
     if (propertyType === "specialcategory") {
@@ -117,6 +134,8 @@ function getTaxValues(propertyType, subType, input, bed, star, subSubType) {
             case "bank":
             case "club":
             case "pg":
+            case "petrolpump":
+            case "itparkcybercity/park":
             case "privateoffice":
                 if (config.propertytype[propertyType][subType]['commercial']['status'] !== undefined && config.propertytype[propertyType][subType]['commercial']['status'] == true) {
                     commercialPrice = config.propertytype[propertyType][subType]['commercial']['value']
@@ -179,27 +198,25 @@ function getTaxValues(propertyType, subType, input, bed, star, subSubType) {
         }
 
     }
-
-    getRebate("stategovernmentbuilding", propertyType,"self_occupied" ,  "", input, function (rebateValue) {
+    getRebate("norebate", propertyType, subType, "self_occupied", "ground", input, function (rebateValue) {
         console.log(rebateValue);
         taxPerYear = (taxPerYear / 100) * rebateValue;
         console.log('After rebate tax calculated is :' + taxPerYear);
-    })
-
+    });
 }
 
 
 
-function getRebate(rebateParam, propertyType,self_occupied, floor, input, callback) {
+function getRebate(rebateParam, propertyType, subType, ownership, floor, input, callback) {
     var rebParams = config.propertytype['rebate'][rebateParam]['params'];
     console.log(JSON.stringify(rebParams, null, 2));
-    if (propertyType == "residential" && rebParams['self_occupied'] == true && rebateParam == "freedomfighters") {
+    if (propertyType == "residential" && rebParams['ownership'] == true && rebateParam == "freedomfighters") {
 
         rebVal = rebParams['value'];
-        console.log('sass' + rebVal);
+        console.log('residential,self_occupied and freedom fighters' + rebVal);
     }
     else if (propertyType == "residential" && rebParams['self_occupied'] == true) {
-        console.log('strindsg')
+        console.log('residential and seff occupied');
         if (typeof rebParams['area'] == string && input < rebParams['area']) {
             console.log('in if');
             rebVal = rebParams['value'];
@@ -209,7 +226,20 @@ function getRebate(rebateParam, propertyType,self_occupied, floor, input, callba
         console.log('Vacant pot');
         rebVal = 0;
     }
+    else if (subType === "house" || subType === "flat") {
+
+        console.log('House or flat rebate');
+        if (ownership === "self_occupied") {
+            rebVal = config.propertytype[propertyType][subType]["rebate"]["ground"];
+            console.log("resid rebate ==>" + config.propertytype[propertyType][subType]["rebate"][floor]);
+        }
+        else {
+            console.log("Not self_occupied");
+            rebVal = 40;
+        }
+    }
     else {
+        console.log('Else rebate');
         rebVal = config.propertytype['rebate'][rebateParam]['params']['value'];
     }
     // console.log(rebVal + " <==");

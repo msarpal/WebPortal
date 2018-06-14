@@ -29,7 +29,12 @@
                         "category": "E",
                         "value": "more"
                     }
-                ]
+                ],
+              "rebate":{
+                  "ground":40,
+                  "basement":50,
+                  "above":50
+              }
             },
             "flat": {
                 "A": 1,
@@ -76,7 +81,12 @@
                         "category": "D",
                         "value": 1000
                     }
-                ]
+                ],
+                "rebate":{
+                    "ground":40,
+                    "basement":50,
+                    "above":50
+                }
             },
             "commercialspace": {
                 "A": 12,
@@ -188,14 +198,33 @@
         },
         "vacantplot": {
             "residential": {
-                "A": 0.50,
-                "B": 1,
-                "min": 101,
+                "A": 0,
+                "B": 0.50,
+                "C" : 1,
                 "unit": "squareyard",
                 "range": [
                     {
                         "category": "A",
+                        "value": 100
+                    },
+                    {
+                        "category": "B",
                         "value": 500
+                    },
+                    {
+                        "category": "C",
+                        "value": "more"
+                    }
+                ]
+            },
+            "commercial": {
+                "A":0,
+                "B": 5.00,
+                "unit": "squareyard",
+                "range": [
+                    {
+                        "category": "A",
+                        "value": 100
                     },
                     {
                         "category": "B",
@@ -203,22 +232,14 @@
                     }
                 ]
             },
-            "commercial": {
-                "A": 5.00,
-                "min": 101,
+            "industrial/institutional": {
+                "A": 2.00,
                 "unit": "squareyard",
                 "range": [
                     {
                         "category": "A",
-                        "value": 100
-                    }
-                ]
-            },
-            "industrial/institutional": {
-                "A": 2.00,
-                "unit": "squareyard",
-                "min": 501,
-                "range": [
+                        "value": "500"
+                    },
                     {
                         "category": "A",
                         "value": "more"
@@ -337,6 +358,18 @@
                     "value": 50
                 }
             },
+            "petrolpump": {
+                "commercial": {
+                    "status": true,
+                    "value": 50
+                }
+            },
+            "itparkcybercity/park": {
+                "commercial": {
+                    "status": true,
+                    "value": 50
+                }
+            },
             "restaurant": {
                 "A": 75,
                 "B": 100,
@@ -359,7 +392,7 @@
         "rebate": {
             "norebate": {
                 "params": {
-                    "value": 0,
+                    "value": 100,
                     "self_occupied": false,
                     "area": "no"
                 }
