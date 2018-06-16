@@ -36,10 +36,12 @@ function taxCalculator(req, res) {
     // getTaxValues("specialcategory", "hotel", 10000, '', 5, '','','');
     // getTaxValues("specialcategory", "grainmarket", 10000, '', '', 'booth','','');
 
-    // getTaxValues("residential", "house", 9680, '', '', '','','');
-    getTaxValues("commercial", "shop", 900, '', '', '','parking','basement');
+    getTaxValues("residential", "flat", 200, '', '', '','','');
+    // getTaxValues("laldora", "shop", 900, '', '', '', 'parking', 'basement');
+    // getTaxValues("commercial", "shop", 900, '', '', '', 'parking','2015' 'basement');
+
     // getTaxValues("commercial", "commercialspace", 900, '', '', '','rented','');
-    
+
     // getTaxValues("institutional", "commercial", 2600, '','','','','');
     // getTaxValues("industrial", "", 2600, '','','','','');
     // getTaxValues("vacantplot", "residential", 5000, '', '', '','','');
@@ -61,7 +63,10 @@ function taxCalculator(req, res) {
  * @param {*} star 
  * @param {*} subSubType 
  */
-function getTaxValues(propertyType, subType, input, bed, star, subSubType,ownership,floor){
+function getTaxValues(propertyType, subType, input, bed, star, subSubType, usage, floor) {
+
+    var constructYear = 2014;
+
     console.log('Getting values ..');
     console.log('Taxation values --> ' + propertyType + " " + subType);
 
@@ -81,11 +86,11 @@ function getTaxValues(propertyType, subType, input, bed, star, subSubType,owners
         console.log("subtype " + subType);
         utility.getPriceCategory(propertyType, subType, input, function (price) {
             console.log(propertyType + ' done');
-            if (propertyType === "commercial"  && (subType === "shop" || subType === "commercialspace" ) && floor === "basement" && ownership === "parking") {
+            if (propertyType === "commercial" && (subType === "shop" || subType === "commercialspace") && floor === "basement" && usage === "parking") {
                 console.log('Commercial shop/comm space and parking')
                 price = 0;
             }
-            if (propertyType === "commercial"  && (subType === "shop" || subType === "commercialspace" ) && ownership === "rented") {
+            if (propertyType === "commercial" && (subType === "shop" || subType === "commercialspace") && usage === "rented") {
                 console.log('Commercial shop/comm space and rented')
                 price = price * 125;
             }
@@ -101,11 +106,11 @@ function getTaxValues(propertyType, subType, input, bed, star, subSubType,owners
     if (propertyType === "vacantplot") {
 
         // if (config.propertytype[propertyType][subType].min !== undefined && input > config.propertytype[propertyType][subType].min) {
-            console.log(propertyType + ' Vacant plot');
-            utility.getPriceCategory(propertyType, subType, input, function (price) {
-                console.log(propertyType + ' done');
-                taxPerYear = price;
-            });
+        console.log(propertyType + ' Vacant plot');
+        utility.getPriceCategory(propertyType, subType, input, function (price) {
+            console.log(propertyType + ' done');
+            taxPerYear = price;
+        });
         // }
         // else {
         //     console.log('Could not calculate the tax as minimum covered area for this property is ' + config.propertytype[propertyType][subType].min);
@@ -198,7 +203,7 @@ function getTaxValues(propertyType, subType, input, bed, star, subSubType,owners
         }
 
     }
-    getRebate("norebate", propertyType, subType, "self_occupied", "ground", input, function (rebateValue) {
+    getRebate("norebate", propertyType, subType, "rent", "ground", input, constructYear, function (rebateValue) {
         console.log(rebateValue);
         taxPerYear = (taxPerYear / 100) * rebateValue;
         console.log('After rebate tax calculated is :' + taxPerYear);
@@ -207,13 +212,17 @@ function getTaxValues(propertyType, subType, input, bed, star, subSubType,owners
 
 
 
-function getRebate(rebateParam, propertyType, subType, ownership, floor, input, callback) {
+function getRebate(rebateParam, propertyType, subType, usage, floor, input, constructYear, callback) {
     var rebParams = config.propertytype['rebate'][rebateParam]['params'];
     console.log(JSON.stringify(rebParams, null, 2));
-    if (propertyType == "residential" && rebParams['ownership'] == true && rebateParam == "freedomfighters") {
+    if (propertyType == "residential" && rebParams['usage'] == true && rebateParam == "freedomfighters") {
 
         rebVal = rebParams['value'];
         console.log('residential,self_occupied and freedom fighters' + rebVal);
+    }
+    else if (propertyType === "residential" && subType === "flat" && input <= 2000) {
+        console.log('Residential and flat rebate');
+        rebVal = 50;
     }
     else if (propertyType == "residential" && rebParams['self_occupied'] == true) {
         console.log('residential and seff occupied');
@@ -226,16 +235,21 @@ function getRebate(rebateParam, propertyType, subType, ownership, floor, input, 
         console.log('Vacant pot');
         rebVal = 0;
     }
-    else if (subType === "house" || subType === "flat") {
+    else if (subType === "house" || subType === "shop") {
 
         console.log('House or flat rebate');
-        if (ownership === "self_occupied") {
+        if (usage === "self_occupied") {
             rebVal = config.propertytype[propertyType][subType]["rebate"]["ground"];
             console.log("resid rebate ==>" + config.propertytype[propertyType][subType]["rebate"][floor]);
         }
         else {
             console.log("Not self_occupied");
             rebVal = 40;
+        }
+    }
+    else if (propertyType === "laldora") {
+        if (constructYear < "2010" && constructYear > "2016") {
+            rebVal = 0;
         }
     }
     else {
